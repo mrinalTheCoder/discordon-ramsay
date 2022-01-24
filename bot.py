@@ -14,7 +14,6 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 
-	print(message.content)
 	if message.content.startswith('!greet'):
 		await message.channel.send('Hello!')
 	if message.content.startswith('!search'):
