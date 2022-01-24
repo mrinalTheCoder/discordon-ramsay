@@ -1,24 +1,25 @@
 import discord
+from discord.ext import commands
 import os
 from backend import search_recipe
 
-client = discord.Client()
 TOKEN = 'OTI2MDEzNDcyNjk5OTczNjcy.Yc1fQA.6EX2T7g8DK3KmbstOEbsWEPgfJk'
+bot = commands.Bot(command_prefix='!')
 
-@client.event
-async def on_ready():
-	print('We have logged in as {0.user}'.format(client))
 
-@client.event
-async def on_message(message):
-	if message.author == client.user:
-		return
+@bot.command()
+async def greet(ctx):
+	await ctx.channel.send('hello')
 
-	if message.content.startswith('!greet'):
-		await message.channel.send('Hello!')
-	if message.content.startswith('!search'):
-		recipes = search_recipe(message.content[len('!search'):])
-		for i in range(min(len(recipes), 5)):
-			await message.channel.send(recipes[i])
+@bot.command()
+async def search(ctx, arg):
+	recipes = search_recipe(arg)
+	for i in range(min(len(recipes), 5)):
+		img = recipes[i]['img']
+		img = img.replace('%3A', ':')
+		img = img.replace('%2F', '/')
+		embed = discord.Embed(title=f"{i+1}. {recipes[i]['name']}", url=recipes[i]['link'], color=0xEA3A44)
+		embed.set_image(url=img)
+		await ctx.channel.send(embed=embed)
 
-client.run(TOKEN)
+bot.run(TOKEN)
