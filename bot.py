@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import os
-from backend import search_recipe
+import backend
 import emoji
 
 TOKEN = 'OTI2MDEzNDcyNjk5OTczNjcy.Yc1fQA.6EX2T7g8DK3KmbstOEbsWEPgfJk'
@@ -21,7 +21,7 @@ async def cmds(ctx):
 
 @bot.command()
 async def search(ctx, arg):
-	recipes = search_recipe(arg)
+	recipes = backend.search_recipe(arg)
 	for i in range(min(len(recipes), 5)):
 		img = recipes[i]['img']
 		img = img.replace('%3A', ':')
@@ -31,6 +31,17 @@ async def search(ctx, arg):
 		await ctx.channel.send(embed=embed)
 	
 	msg = await bot.wait_for('message', check=lambda message: message.author == ctx.author)
-	await ctx.channel.send(f'`Confirmed, recipe {msg.content}`')
+	idx = int(msg.content[0]) - 1
+	await ctx.channel.send(f'`Confirmed, recipe {idx+1}`')
+	details = backend.get_recipe_details(recipes[idx])
+	embed = discord.Embed(title="Ingredients (4 servings)")
+	for i in range(len(details['ing'])):
+		embed.add_field(name=f'{i+1}', value=details['ing'][i], inline=False)
+	await ctx.channel.send(embed=embed)
+
+	embed = discord.Embed(title='Instructions')
+	for i in range(len(details['steps'])):
+		embed.add_field(name=f'{i+1}', value=details['steps'][i], inline=False)
+	await ctx.channel.send(embed=embed)
 
 bot.run(TOKEN)

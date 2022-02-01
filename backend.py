@@ -15,10 +15,21 @@ def search_recipe(a):
 	response = requests.get(searchURL)
 	content = response.content
 	soup = BeautifulSoup(content, "html.parser")
-	#print(soup)
-	#Title = soup.find_all("a", {"class":"card__titleLink manual-link-behavior"})
 	Title = soup.find_all("a", {"class":"card__titleLink"})
-	#print(Title)
 	x = Title[:10:2]
 	x = list(map(get_elements_from_tag, x))
 	return x
+
+def get_recipe_details(d):
+	response = requests.get(d['link'])
+	content = response.content
+	soup = BeautifulSoup(content, "html.parser")
+	ingredients = soup.find('ul', {'class': 'ingredients-section'}).findChildren('li')
+	final_list = []
+	for i in ingredients:
+		label = i.findChildren('label')[0].findChildren('input')[0]
+		final_list.append(f'{label["data-quantity"]} {label["data-unit"]} {label["data-ingredient"]}')
+	
+	instructions = soup.find('ul', {'class': 'instructions-section'}).findChildren('li')
+	instructions = list(map(lambda x:x.findChildren('p', recursive=True)[0].get_text(),  instructions))
+	return {'ing': final_list, 'steps': instructions}
