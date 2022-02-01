@@ -26,7 +26,7 @@ async def search(ctx, arg):
 		img = recipes[i]['img']
 		img = img.replace('%3A', ':')
 		img = img.replace('%2F', '/')
-		embed = discord.Embed(title=f"{i+1}. {recipes[i]['name']}", url=recipes[i]['link'], color=0xEA3A44)
+		embed = discord.Embed(title=f"{i+1}. {recipes[i]['name']}", url=recipes[i]['link'], color=0xEA3A44, description=recipes[i]['desc'])
 		embed.set_image(url=img) 
 		await ctx.channel.send(embed=embed)
 	
