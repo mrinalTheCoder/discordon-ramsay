@@ -6,11 +6,9 @@ import backend
 TOKEN = 'OTI2MDEzNDcyNjk5OTczNjcy.Yc1fQA.6EX2T7g8DK3KmbstOEbsWEPgfJk'
 bot = commands.Bot(command_prefix='!')
 
-
 @bot.command()
 async def greet(ctx):
     await ctx.channel.send('hello')
-
 
 @bot.command()
 async def cmds(ctx):
@@ -19,7 +17,6 @@ async def cmds(ctx):
     embed.add_field(name='!search', value='place this keyword before you search for any recipe', inline=True)
     embed.add_field(name='!greet', value='for a greeting message', inline=False)
     await ctx.channel.send(embed=embed)
-
 
 @bot.command()
 async def search(ctx, arg):
@@ -57,14 +54,15 @@ async def bfast(ctx):
     embed = discord.Embed(title=f" {recipes['name']}", url=recipes['link'], color=0xEA3A44, description=recipes["desc"])
     embed.set_image(url=img)
     await ctx.channel.send(embed=embed)
+
     embed = discord.Embed(title="Ingredients (4 servings)")
     for i in range(len(details['ing'])):
         embed.add_field(name=f'{i + 1}', value=details['ing'][i], inline=False)
     await ctx.channel.send(embed=embed)
+
     embed = discord.Embed(title='Instructions')
     for i in range(len(details['steps'])):
         embed.add_field(name=f'{i + 1}', value=details['steps'][i], inline=False)
     await ctx.channel.send(embed=embed)
-
 
 bot.run(TOKEN)
