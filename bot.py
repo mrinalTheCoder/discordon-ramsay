@@ -1,10 +1,13 @@
 import discord
 from discord.ext import commands
+from discord import Color
 import os
 import backend
 
 TOKEN = 'OTI2MDEzNDcyNjk5OTczNjcy.Yc1fQA.6EX2T7g8DK3KmbstOEbsWEPgfJk'
 bot = commands.Bot(command_prefix='!')
+
+nonveg_list = ['chicken', 'pork', 'mutton', 'meat', 'lamb', 'beef', 'fish', 'prawn', 'shrimp', 'poultry', 'oyster', 'lobster', 'crab', 'sausage', 'pepperoni']
 
 @bot.command()
 async def greet(ctx):
@@ -57,7 +60,21 @@ async def bfast(ctx):
 	embed.set_image(url=img)
 	await ctx.channel.send(embed=embed)
 
-	embed = discord.Embed(title="Ingredients (4 servings)")
+	veg = True
+	egg = False
+	for i in details['ing']:
+		if 'egg' in i:
+			egg = True
+		for j in nonveg_list:
+			if j in i:
+				veg = False
+
+	if egg and veg:
+		embed = discord.Embed(title="Ingredients (4 servings)\nContains Egg", color=Color.white())
+	elif not veg:
+		embed = discord.Embed(title="Ingredients (4 servings)\nNon Veg Recipe", color=Color.red())
+	else:
+		embed = discord.Embed(title="Ingredients (4 servings)\nVeg Recipe", color=Color.green())
 	for i in range(len(details['ing'])):
 		embed.add_field(name=f'{i + 1}', value=details['ing'][i], inline=False)
 	await ctx.channel.send(embed=embed)
