@@ -69,3 +69,12 @@ def random_meal(meal_page_link, total=8):
 def random_bfast():
 	bfast="https://www.allrecipes.com/recipes/78/breakfast-and-brunch/"
 	return random_meal(bfast)
+def random_lunch():
+    lunch="https://www.allrecipes.com/recipes/17561/lunch/"
+    return random_meal(lunch)
+def random_dinner():
+    dinner="https://www.allrecipes.com/recipes/17562/dinner/"
+    return random_meal(dinner)
+def random_drinks():
+	drinks="https://www.allrecipes.com/recipes/77/drinks/"
+	return random_meal(drinks)
