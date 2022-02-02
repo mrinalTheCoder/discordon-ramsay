@@ -1,10 +1,6 @@
-import lxml
-from requests_html import HTMLSession
-from bs4 import BeautifulSoup
-import random
-
 import requests
 from bs4 import BeautifulSoup
+import random
 
 def get_elements_from_tag(tag):
 	d = {}
