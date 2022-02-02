@@ -21,9 +21,9 @@ def search_recipe(a):
 	x = list(map(get_elements_from_tag, x))
 	description = soup.find_all('div', {'class': 'card__summary'})
 	description = list(map(lambda inp:inp.get_text().strip(), description))
-	print(description)
+	for i in range(len(x)):
+		x[i]['desc'] = description[i]
 	return x
-
 
 def get_recipe_details(d):
 	response = requests.get(d['link'])

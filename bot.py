@@ -29,8 +29,7 @@ async def search(ctx, arg):
 		img = recipes[i]['img']
 		img = img.replace('%3A', ':')
 		img = img.replace('%2F', '/')
-		embed = discord.Embed(title=f"{i + 1}. {recipes[i]['name']}", url=recipes[i]['link'], color=0xEA3A44,
-							  description=recipes[i]['desc'])
+		embed = discord.Embed(title=f"{i + 1}. {recipes[i]['name']}", url=recipes[i]['link'], color=0xEA3A44, description=recipes[i]['desc'])
 		embed.set_image(url=img)
 		await ctx.channel.send(embed=embed)
 
@@ -38,7 +37,7 @@ async def search(ctx, arg):
 	idx = int(msg.content[0]) - 1
 	await ctx.channel.send(f'`Confirmed, recipe {idx + 1}`')
 	details = backend.get_recipe_details(recipes[idx])
-	embed = discord.Embed(title="Ingredients (4 servings)")
+	embed = discord.Embed(title="Ingredients(4 servings)")
 	for i in range(len(details['ing'])):
 		embed.add_field(name=f'{i + 1}', value=details['ing'][i], inline=False)
 	await ctx.channel.send(embed=embed)
@@ -47,7 +46,6 @@ async def search(ctx, arg):
 	for i in range(len(details['steps'])):
 		embed.add_field(name=f'{i + 1}', value=details['steps'][i], inline=False)
 	await ctx.channel.send(embed=embed)
-
 
 @bot.command()
 async def bfast(ctx):
