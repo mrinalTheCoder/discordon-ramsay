@@ -14,11 +14,11 @@ async def greet(ctx):
 async def cmds(ctx):
 	embed = discord.Embed(colour=discord.Colour.red())
 	embed.set_author(name='COMMAND LIST')
-	embed.add_field(name='!search', value='Place this keyword before you search for the recipe of your choice ', inline=True)
-	embed.add_field(name='!greet', value='For a greeting message', inline=True)
-	embed.add_field(name= '!bfast', value='For a hearty breakfast recipe!' , inline = True)
-	embed.add_field(name= '!lunch', value='For a handpicked sumptuous lunch recipe!' , inline = True)
-	embed.add_field(name= '!dinner', value='For a delicious dinner!' , inline = True)
+	embed.add_field(name='!search', value='Place this keyword before you search for the recipe of your choice ', inline=False)
+	embed.add_field(name='!greet', value='For a greeting message', inline=False)
+	embed.add_field(name= '!bfast', value='For a hearty breakfast recipe!' , inline = False)
+	embed.add_field(name= '!lunch', value='For a handpicked sumptuous lunch recipe!' , inline = False)
+	embed.add_field(name= '!dinner', value='For a delicious dinner!' , inline=False)
 	
 	await ctx.channel.send(embed=embed)
 
