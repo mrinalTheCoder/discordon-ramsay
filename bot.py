@@ -16,8 +16,12 @@ async def greet(ctx):
 async def cmds(ctx):
     embed = discord.Embed(colour=discord.Colour.red())
     embed.set_author(name='COMMAND LIST')
-    embed.add_field(name='!search', value='place this keyword before you search for any recipe', inline=True)
-    embed.add_field(name='!greet', value='for a greeting message', inline=False)
+    embed.add_field(name='!search', value='Place this keyword before you search for the recipe of your choice ', inline=True)
+    embed.add_field(name='!greet', value='For a greeting message', inline=True)
+    embed.add_field(name= '!bfast', value='For a hearty breakfast recipe!' , inline = True)
+    embed.add_field(name= '!lunch', value='For a handpicked sumptuous lunch recipe!' , inline = True)
+    embed.add_field(name= '!dinner', value='For a delicious dinner!' , inline = True)
+    
     await ctx.channel.send(embed=embed)
 
 
@@ -66,5 +70,13 @@ async def bfast(ctx):
         embed.add_field(name=f'{i + 1}', value=details['steps'][i], inline=False)
     await ctx.channel.send(embed=embed)
 
+pfp_path = "C:\school stuff\gordondisappointed.jpg"
+
+fp = open(pfp_path, 'rb')
+pfp = fp.read()
+
+@bot.event
+async def on_ready():
+    await bot.user.edit(avatar=pfp)
 
 bot.run(TOKEN)
