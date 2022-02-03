@@ -11,8 +11,9 @@ def get_elements_from_tag(tag):
 	return d
 
 def search_recipe(a):
-	a.replace(" ", "+")
+	a = "+".join(a)
 	searchURL = "https://www.allrecipes.com/search/results/?search=" + a
+	print(searchURL)
 	response = requests.get(searchURL)
 	content = response.content
 	soup = BeautifulSoup(content, "html.parser")
@@ -47,7 +48,7 @@ def random_meal(meal_page_link, inds=list(range(8))):
 	x = Title[::2]
 	x = [x[i] for i in inds]
 	x = list(map(get_elements_from_tag, x))
-	descriptions = soup.find_all('div', {'class': 'card__summary'})[:max(inds)]
+	descriptions = soup.find_all('div', {'class': 'card__summary'})[:max(inds)+1]
 	descriptions = list(map(lambda inp: inp.get_text().strip(), descriptions))
 	for i in range(len(x)):
 		x[i]['desc'] = descriptions[i]
