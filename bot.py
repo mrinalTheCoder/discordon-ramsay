@@ -30,6 +30,11 @@ async def cmds(ctx):
 	embed.add_field(name='!dessert' , value = 'For a savory sweet' , inline =False)
 	await ctx.channel.send(embed=embed)
 
+@bot.event
+async def on_message(message):
+	if f'<@!{bot.user.id}>' in message.content:
+		await cmds(message)
+
 @bot.command()
 async def search(ctx, *arg):
 	recipes = backend.search_recipe(arg)
