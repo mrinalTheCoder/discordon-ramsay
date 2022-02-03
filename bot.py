@@ -71,16 +71,19 @@ async def send_recipe(ctx, recipes, details):
 				veg = False
 
 	if egg and veg:
-		embed = discord.Embed(title="Ingredients (4 servings)\nContains Egg", color=Color.greyple())
+		color_ = Color.greyple()
+		embed = discord.Embed(title="Ingredients (4 servings)\nContains Egg", color=color_)
 	elif not veg:
-		embed = discord.Embed(title="Ingredients (4 servings)\nNon Veg Recipe", color=Color.red())
+		color_ = Color.red()
+		embed = discord.Embed(title="Ingredients (4 servings)\nNon Veg Recipe", color=color_)
 	else:
-		embed = discord.Embed(title="Ingredients (4 servings)\nVeg Recipe", color=Color.green())
+		color_ = Color.green()
+		embed = discord.Embed(title="Ingredients (4 servings)\nVeg Recipe", color=color_)
 	for i in range(len(details['ing'])):
 		embed.add_field(name=f'{i + 1}', value=details['ing'][i], inline=False)
 	await ctx.channel.send(embed=embed)
 
-	embed = discord.Embed(title='Instructions')
+	embed = discord.Embed(title='Instructions', color=color_)
 	for i in range(len(details['steps'])):
 		embed.add_field(name=f'{i + 1}', value=details['steps'][i], inline=False)
 	await ctx.channel.send(embed=embed)
