@@ -4,7 +4,7 @@ from discord import Color
 import os
 import backend
 
-TOKEN = 'OTI2MDEzNDcyNjk5OTczNjcy.Yc1fQA.6EX2T7g8DK3KmbstOEbsWEPgfJk'
+TOKEN = "" # token not available online for safety resons
 bot = commands.Bot(command_prefix='!')
 
 nonveg_list = ['chicken', 'pork', 'mutton', 'meat', 'lamb', 'beef', 'fish', 'prawn', 'shrimp', 'poultry', 'oyster', 'lobster', 'crab', 'sausage', 'pepperoni', 'ham', 'bacon']
